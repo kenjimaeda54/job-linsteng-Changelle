@@ -51,22 +51,24 @@ function FirstPage(){
             {item.tools.length === 0
               ? '' //{value} porque estamos em uma renderização condicional
               : // não consigo pegar direto
-                item.tools.map((value) => (
+                item.tools.map((value,index) => (
                   <Link
+                    key={index}
                     className="tool"
                     to={{
-                      pathname: '/filter',
+                      pathname: '/role',
                       state: { filter: value },
                     }}
                   >
                     {value}
                   </Link>
                 ))}
-            {item.languages.map((languages) => (
+            {item.languages.map((languages,index) => (
               <Link
+                key={index}
                 className="tool"
                 to={{
-                  pathname: '/filter',
+                  pathname: '/role',
                   state: { filter: languages },
                 }}
               >

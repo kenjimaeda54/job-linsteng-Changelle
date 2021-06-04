@@ -1,21 +1,31 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { useLocation, } from 'react-router';
 import { Link } from 'react-router-dom';
-import {data} from '../data';
-import done from '../assets/img/done.svg';
-import '../assets/css/role.css';
+import {data} from '../../data';
+import done from '../../assets/img/done.svg';
+import '../../assets/css/role.css';
 
 
 const FilterFister =() => {
+ const [filters,setFilters] = useState([])
+ const [params,setParams] = useState('')
  const location = useLocation();
  const {filter} = location.state;
- // eslint-disable-next-line array-callback-return
- const filters = data.filter(function(value,index){
-      if(value.role === filter) return value; 
- })
+
+ useEffect(() => {
+  if(filter === 'Fullstack' || filter === 'Backend' || filter === 'Frontend'){
+    setParams(filter)
+    // eslint-disable-next-line array-callback-return
+    const filters = data.filter((value)=>{
+      if(value.role === params) return  value;
+    });
+    setFilters(filters)  
+ }  
+ }, [filters,params,filter])
+
    return(
       <div className="container">
-       <div className="filters" > 
+      <div className="filters" > 
           <li className="filters-all"  >
              <h3>{filter}</h3>
              <Link  to={'/'}>
@@ -50,7 +60,7 @@ const FilterFister =() => {
               ''
             ) : (
               <Link className="tool" to={{
-                pathname: '/filter',
+                pathname: '/role',
                 state: {filter:item.role}
               }}>
               {item.role}   
@@ -61,30 +71,38 @@ const FilterFister =() => {
             ) : (
               <Link
                 className="tool"
-                to={{ pathname: './filter', state: { filter: item.level } }}
+                to={{  pathname: '/filter/second',
+                       state: {filter: filters,
+                               level: item.level,
+                               role: item.role,
+                               }}}
               >
                 {item.level}
+
               </Link>
             )}
             {item.tools.length === 0
               ? '' //{value} porque estamos em uma renderização condicional
               : // não consigo pegar direto
-                item.tools.map((value) => (
+                item.tools.map((value,index) => (
+                  
                   <Link
+                    key={index}
                     className="tool"
                     to={{
-                      pathname: '/filter',
+                      pathname: '/role',
                       state: { filter: value },
                     }}
                   >
                     {value}
                   </Link>
                 ))}
-            {item.languages.map((languages) => (
+            {item.languages.map((languages,index) => (
               <Link
+                key={index}
                 className="tool"
                 to={{
-                  pathname: '/filter',
+                  pathname: '/role',
                   state: { filter: languages },
                 }}
               >

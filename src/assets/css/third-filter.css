@@ -40,11 +40,29 @@
   width: 2.5vw;
   height: 2.5vw;
 }
+.done1 {
+  display: block;
+  position: absolute;
+  top: 5vh;
+  left: 18.5vw;
+  width: 2.5vw;
+  height: 2.5vw;
+}
+.done2 {
+  display: block;
+  position: absolute;
+  top: 5vh;
+  left: 33.5vw;
+  width: 2.5vw;
+  height: 2.5vw;
+}
 .clear {
   display: flex;
   align-items: flex-start;
+  position: absolute;
+  left: 70vw;
   justify-content: flex-end;
-  width: 100vw;
+  width: 10vw;
   letter-spacing: -0.1px;
   text-decoration-line: underline;
   font-family: Spartan;

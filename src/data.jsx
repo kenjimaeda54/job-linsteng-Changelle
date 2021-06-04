@@ -11,7 +11,7 @@ import loopStudios from '../src/assets/img/loop-studios.svg';
 
 export const data = [
   {
-    id: 1,
+    id: '1',
     company: 'Photosnap',
     logo: photoSnap,
     new: true,
@@ -26,7 +26,7 @@ export const data = [
     tools: [],
   },
   {
-    id: 2,
+    id: '2',
     company: 'Manage',
     logo: manage,
     new: true,
@@ -41,7 +41,7 @@ export const data = [
     tools: ['React'],
   },
   {
-    id: 3,
+    id: '3',
     company: 'Account',
     logo: account,
     new: true,
@@ -56,7 +56,7 @@ export const data = [
     tools: ['React', 'Sass'],
   },
   {
-    id: 4,
+    id: '4',
     company: 'MyHome',
     logo: myHome,
     new: false,
@@ -71,7 +71,7 @@ export const data = [
     tools: [],
   },
   {
-    id: 5,
+    id: '5',
     company: 'Loop Studios',
     logo: loopStudios,
     new: false,
@@ -86,7 +86,7 @@ export const data = [
     tools: ['Ruby', 'Sass'],
   },
   {
-    id: 6,
+    id: '6',
     company: 'FaceIt',
     logo: faceIt,
     new: false,
@@ -101,7 +101,7 @@ export const data = [
     tools: ['RoR'],
   },
   {
-    id: 7,
+    id:'7',
     company: 'Shortly',
     logo: shortly,
     new: false,
@@ -116,7 +116,7 @@ export const data = [
     tools: ['Sass'],
   },
   {
-    id: 8,
+    id: '8',
     company: 'Insure',
     logo: insure,
     new: false,
@@ -131,7 +131,7 @@ export const data = [
     tools: ['Vue', 'Sass'],
   },
   {
-    id: 9,
+    id: '9',
     company: 'Eyecam Co.',
     logo: eyeCam,
     new: false,
@@ -146,7 +146,7 @@ export const data = [
     tools: ['Django'],
   },
   {
-    id: 10,
+    id: '10',
     company: 'The Air Filter Company',
     logo: airFilter,
     new: false,
