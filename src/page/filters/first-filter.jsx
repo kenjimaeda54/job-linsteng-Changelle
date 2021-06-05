@@ -1,28 +1,53 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useMemo} from 'react';
 import { useLocation, } from 'react-router';
 import { Link } from 'react-router-dom';
 import {data} from '../../data';
+import { useEffect } from 'react';
+import {RuleData,Timer} from '../../util'
 import done from '../../assets/img/done.svg';
-import '../../assets/css/role.css';
+import '../../assets/css/filter.css';
+
+
 
 
 const FilterFister =() => {
  const [filters,setFilters] = useState([])
- const [params,setParams] = useState('')
+ const visible = Timer(); 
+ const [changeStyle,setChangeStyle] = useState(false)
+ const{role,level,languages,tools} = RuleData()
  const location = useLocation();
  const {filter} = location.state;
+ 
+ useEffect(()=>{
+   if(filters.length <=2  && visible ){
+      setChangeStyle(true)
+   }
 
- useEffect(() => {
-  if(filter === 'Fullstack' || filter === 'Backend' || filter === 'Frontend'){
-    setParams(filter)
+ },[visible,filters])
+
+
+   
+ const paramsFilter = useMemo(()=>{
+  const filtersData =   {
     // eslint-disable-next-line array-callback-return
-    const filters = data.filter((value)=>{
-      if(value.role === params) return  value;
-    });
-    setFilters(filters)  
- }  
- }, [filters,params,filter])
+    languages: data.filter(value=>{if(value.languages.includes(filter)) return value}),
+    // eslint-disable-next-line array-callback-return
+    tools: data.filter(value=>{if(value.tools.includes(filter)) return value }),
+    role:  data.filter(value=> value.role === filter ),
+    level: data.filter(value=>value.level === filter),
+  }
+  return filtersData;
 
+ },[filter])
+  
+ useEffect(()=>{
+   if(role.includes(filter)) return setFilters(paramsFilter.role); 
+   if(level.includes(filter)) return setFilters(paramsFilter.level);
+   if(languages.includes(filter)) return setFilters(paramsFilter.languages);
+   if(tools.includes(filter)) return setFilters(paramsFilter.tools);
+  },[paramsFilter,role,filter,languages,level,tools])
+   
+    
    return(
       <div className="container">
       <div className="filters" > 
@@ -32,6 +57,7 @@ const FilterFister =() => {
                <img className="done"  type="image"  src={done} alt="done" />
              </Link>
           </li> 
+          <small>{changeStyle && 'Sua lista possui 3 ou menos itens,para filtra novamente precisa limpar a lista' }</small>
           <Link className="clear" to={'/'}  > Limpar </Link>  
        </div> 
          {filters.map((item) => (
@@ -59,18 +85,19 @@ const FilterFister =() => {
             {item.role === '' ? (
               ''
             ) : (
-              <Link className="tool" to={{
+              <Link className={changeStyle? 'tool hidden' : 'tool' }  
+              to={{
                 pathname: '/role',
                 state: {filter:item.role}
               }}>
               {item.role}   
-              </Link>
+              </Link> 
             )}
             {item.level === '' ? (
               ''
             ) : (
               <Link
-                className="tool"
+              className={changeStyle? 'tool hidden' : 'tool' }
                 to={{  pathname: '/filter/second',
                        state: {filter: filters,
                                level: item.level,
@@ -84,11 +111,10 @@ const FilterFister =() => {
             {item.tools.length === 0
               ? '' //{value} porque estamos em uma renderização condicional
               : // não consigo pegar direto
-                item.tools.map((value,index) => (
-                  
+                item.tools.map((value,index) => (  
                   <Link
                     key={index}
-                    className="tool"
+                    className={changeStyle? 'tool hidden' : 'tool' }
                     to={{
                       pathname: '/role',
                       state: { filter: value },
@@ -100,7 +126,7 @@ const FilterFister =() => {
             {item.languages.map((languages,index) => (
               <Link
                 key={index}
-                className="tool"
+                className={changeStyle? 'tool hidden' : 'tool' }
                 to={{
                   pathname: '/role',
                   state: { filter: languages },

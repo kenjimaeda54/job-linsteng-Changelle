@@ -171,3 +171,13 @@ button {
   letter-spacing: -0.1px;
   cursor: pointer;
 }
+
+.hidden {
+  pointer-events: none;
+}
+small {
+  font-size: 10pt;
+  font-weight: 500;
+  font-style: italic;
+  color: rgb(177, 42, 48);
+}
