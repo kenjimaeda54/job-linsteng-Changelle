@@ -1,33 +1,75 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { useLocation,Link } from 'react-router-dom';
+import {ParamsFilter,Timer,FiltersStyleButton} from '../../util/index';
 import done from '../../assets/img/done.svg';
-import '../../assets/css/role-level.css'
+import '../../assets/css/filter-second.css'
 
 
 
 const SecondFilter = () => {
+   const [filters,setFilters] = useState([]);
+   const [changeStyle,setChangStyle] = useState(false);
+   const [buttonClickedRole,setButtonClickedRole] = useState(false);
+   const [buttonClickedLevel,setButtonClickedLevel] = useState(false);
+   const [buttonClickedLanguages,setButtonClickedLanguages] = useState(false);
+   const [buttonClickedTools,setButtonClickedTools] = useState(false);
    const location = useLocation();
-   const {filter,level,role,props} = location.state;
-   // eslint-disable-next-line array-callback-return
-   const filters = filter.filter(item=> {
-       if(item.level === level   ) return item;
-   })
+   const {filteredList,filterSecondJob,firstJobFilter} = location.state;
+   const visible = Timer();
+   const filtersStyleButton = FiltersStyleButton(filterSecondJob); 
+   const {changeButtonRole,changeButtonLevel,changeButtonTools,changeButtonLanguages} = filtersStyleButton; 
+   
+   useEffect(()=>{
+      const filterDataList = {
+         roleButton: ['Frontend','Backend','Fullstack'],
+         levelButton: ['Midweight','Junior','Senior'],
+         toolsButton : ['React','Sass','Ruby','RoR','Vue','Django'],
+         languagesButton: ['CSS','HTML','JavaScript','Python']
+      }
+      if(filterDataList.languagesButton.includes(firstJobFilter))  return setButtonClickedLanguages(true);
+      if(filterDataList.levelButton.includes(firstJobFilter)) return setButtonClickedLevel(true);
+      if(filterDataList.roleButton.includes(firstJobFilter)) return setButtonClickedRole(true);
+      if(filterDataList.toolsButton.includes(firstJobFilter)) return setButtonClickedTools(true);
+     
+  },[firstJobFilter])
+  useEffect(()=>{
+    if(filters.length <= 2 && visible ){
+      setChangStyle(true);
+    }
 
+
+  },[visible,filters])
+  
+ 
+   useEffect(() => {
+      const paramsFilter =  ParamsFilter(filteredList,filterSecondJob)   
+      setFilters(paramsFilter)
+      //cuidado com a dependências do useEffect,se possuir dependências
+      //que sofrem muita renderização vai quebrar, exemplo: filteredList
+      // , ela renderiza todo componente. Não e ideal passar 
+      //como dependência
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   },[filterSecondJob])
+
+  
     return(
         <div className="container">
         <div className="filters" > 
           <li className="filters-all"  >
-             <h3>{role}</h3>
-             <Link  to={'/'}>
+             <h3>{firstJobFilter}</h3>
+             <Link  to={{ pathname:'/filter/',
+                          state: {firstJobFilter:filterSecondJob}       
+             }}>
                <img className="done"  type="image"  src={done} alt="done" />
              </Link>
-             <h3 style={{margin:'auto 2vw ' }} >{level}</h3>
-             <Link  to={{ pathname: '/filter',
-                          state:  {filter: role} 
+             <h3 style={{margin:'auto 2vw ' }} >{filterSecondJob}</h3>
+             <Link  to={{ pathname: '/filter/',
+                          state:  {firstJobFilter} 
                }}>
                <img className='done1' type="image"  src={done} alt="done" />
              </Link>  
-          </li>        
+          </li>
+          <small>{changeStyle && 'Sua lista possui 3 ou menos itens,para filtra novamente precisa limpar a lista' }</small>        
           <Link className="clear" to={'/'}  > Limpar </Link>  
        </div> 
          {filters.map((item) => (
@@ -55,9 +97,14 @@ const SecondFilter = () => {
             {item.role === '' ? (
               ''
             ) : (
-              <Link className="tool" to={{
-                pathname: '/filter',
-                state: {filter:item.role}
+              <Link className={changeStyle || changeButtonRole || buttonClickedRole ? "tool hidden" : "tool"}
+               to={{
+                pathname: '/filter/second/third',
+                state: {listFilter:filters,
+                        firstJobFilter,
+                        filterSecondJob, 
+                        filterThirdJob:item.role, 
+                }
               }}>
               {item.role}   
               </Link>
@@ -66,11 +113,12 @@ const SecondFilter = () => {
               ''
             ) : (
               <Link
-                className="tool"
-                to={{  pathname: '/role/level',
-                       state: {filter: filters,
-                               level: item.level,
-                               role: item.role
+              className={changeStyle || changeButtonLevel || buttonClickedLevel ? "tool hidden" : "tool"}
+                to={{  pathname: '/filter/second/third',
+                       state: {listFilter:filters,
+                               firstJobFilter,
+                               filterSecondJob, 
+                                filterThirdJob:item.level 
                                }}}
               >
                 {item.level}
@@ -83,16 +131,13 @@ const SecondFilter = () => {
                 item.tools.map((value,index) => (
                   <Link
                     key={index}
-                    className="tool"
+                    className={changeStyle || changeButtonTools || buttonClickedTools? "tool hidden" : "tool"}
                     to={{
                       pathname: '/filter/second/third',
-                      state: { filter: value, 
-                               role,
-                               level,
-                               props,
-                               array: filters,
-                               propsFilter:filters 
-                      
+                      state: { listFilter:filters,
+                               firstJobFilter,
+                               filterSecondJob, 
+                               filterThirdJob:value,              
                       },
                     }}
                   >
@@ -102,14 +147,13 @@ const SecondFilter = () => {
             {item.languages.map((languages,index) => (
               <Link
                 key={index}
-                className="tool"
+                className={changeStyle || changeButtonLanguages || buttonClickedLanguages ? "tool hidden" : "tool"}
                 to={{
-                  pathname: '/role/level/tools',
-                  state: { filter: languages,
-                           array: filters, 
-                           role,
-                           level,
-                           props,
+                  pathname: '/filter/second/third',
+                  state: {listFilter:filters,
+                          firstJobFilter,
+                          filterSecondJob, 
+                          filterThirdJob:languages 
                          },
                 }}
               >

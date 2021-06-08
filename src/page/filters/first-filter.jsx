@@ -1,9 +1,9 @@
-import React,{useState,useMemo} from 'react';
+import React,{useState} from 'react';
 import { useLocation, } from 'react-router';
 import { Link } from 'react-router-dom';
 import {data} from '../../data';
 import { useEffect } from 'react';
-import {RuleData,Timer} from '../../util'
+import {Timer,ParamsFilter,FiltersStyleButton} from '../../util'
 import done from '../../assets/img/done.svg';
 import '../../assets/css/filter.css';
 
@@ -11,13 +11,16 @@ import '../../assets/css/filter.css';
 
 
 const FilterFister =() => {
- const [filters,setFilters] = useState([])
+ const [filters,setFilters] = useState([]);
+ const [changeStyle,setChangeStyle] = useState(false);
  const visible = Timer(); 
- const [changeStyle,setChangeStyle] = useState(false)
- const{role,level,languages,tools} = RuleData()
  const location = useLocation();
- const {filter} = location.state;
- 
+ const {firstJobFilter} = location.state;
+ const filtersStyleButton = FiltersStyleButton(firstJobFilter)
+ const {changeButtonRole,changeButtonLevel,changeButtonTools,changeButtonLanguages} = filtersStyleButton;
+
+
+
  useEffect(()=>{
    if(filters.length <=2  && visible ){
       setChangeStyle(true)
@@ -25,34 +28,19 @@ const FilterFister =() => {
 
  },[visible,filters])
 
-
-   
- const paramsFilter = useMemo(()=>{
-  const filtersData =   {
-    // eslint-disable-next-line array-callback-return
-    languages: data.filter(value=>{if(value.languages.includes(filter)) return value}),
-    // eslint-disable-next-line array-callback-return
-    tools: data.filter(value=>{if(value.tools.includes(filter)) return value }),
-    role:  data.filter(value=> value.role === filter ),
-    level: data.filter(value=>value.level === filter),
-  }
-  return filtersData;
-
- },[filter])
-  
  useEffect(()=>{
-   if(role.includes(filter)) return setFilters(paramsFilter.role); 
-   if(level.includes(filter)) return setFilters(paramsFilter.level);
-   if(languages.includes(filter)) return setFilters(paramsFilter.languages);
-   if(tools.includes(filter)) return setFilters(paramsFilter.tools);
-  },[paramsFilter,role,filter,languages,level,tools])
-   
-    
+       const checkParameters = ParamsFilter(data,firstJobFilter)  
+       setFilters(checkParameters);
+
+  },[firstJobFilter])
+
+
+
    return(
       <div className="container">
       <div className="filters" > 
           <li className="filters-all"  >
-             <h3>{filter}</h3>
+             <h3>{firstJobFilter}</h3>
              <Link  to={'/'}>
                <img className="done"  type="image"  src={done} alt="done" />
              </Link>
@@ -85,10 +73,14 @@ const FilterFister =() => {
             {item.role === '' ? (
               ''
             ) : (
-              <Link className={changeStyle? 'tool hidden' : 'tool' }  
+  
+              <Link className={changeStyle || changeButtonRole? 'tool hidden' : 'tool' }  
               to={{
-                pathname: '/role',
-                state: {filter:item.role}
+                pathname: '/filter/second',
+                state: {filteredList: filters,
+                        filterSecondJob: item.role,
+                        firstJobFilter,
+                }
               }}>
               {item.role}   
               </Link> 
@@ -97,11 +89,12 @@ const FilterFister =() => {
               ''
             ) : (
               <Link
-              className={changeStyle? 'tool hidden' : 'tool' }
+
+              className={changeStyle || changeButtonLevel  ? 'tool hidden' : 'tool' }
                 to={{  pathname: '/filter/second',
-                       state: {filter: filters,
-                               level: item.level,
-                               role: item.role,
+                       state: {filteredList: filters,
+                               filterSecondJob: item.level,
+                               firstJobFilter,
                                }}}
               >
                 {item.level}
@@ -114,11 +107,14 @@ const FilterFister =() => {
                 item.tools.map((value,index) => (  
                   <Link
                     key={index}
-                    className={changeStyle? 'tool hidden' : 'tool' }
+                    className={changeStyle || changeButtonTools  ? 'tool hidden' : 'tool' }
                     to={{
-                      pathname: '/role',
-                      state: { filter: value },
-                    }}
+                      pathname: '/filter/second',
+                      state: { filteredList: filters,
+                        filterSecondJob: value,
+                        firstJobFilter,
+                      
+                      }}}
                   >
                     {value}
                   </Link>
@@ -126,10 +122,13 @@ const FilterFister =() => {
             {item.languages.map((languages,index) => (
               <Link
                 key={index}
-                className={changeStyle? 'tool hidden' : 'tool' }
+                className={changeStyle || changeButtonLanguages ? 'tool hidden' : 'tool' }
                 to={{
-                  pathname: '/role',
-                  state: { filter: languages },
+                  pathname: '/filter/second',
+                  state: { filteredList: filters,
+                    filterSecondJob: languages,
+                    firstJobFilter, 
+                  },
                 }}
               >
                 {languages} 

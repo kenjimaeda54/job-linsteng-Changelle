@@ -33,7 +33,7 @@ function FirstPage(){
             ) : (
               <Link className="tool" to={{
                 pathname: '/filter',
-                state: {filter:item.role}
+                state: {firstJobFilter:item.role}
               }}>
                 {item.role}
               </Link>
@@ -43,7 +43,7 @@ function FirstPage(){
             ) : (
               <Link
                 className="tool"
-                to={{ pathname: './filter', state: { filter: item.level } }}
+                to={{ pathname: './filter', state: { firstJobFilter: item.level } }}
               >
                 {item.level}
               </Link>
@@ -57,7 +57,7 @@ function FirstPage(){
                     className="tool"
                     to={{
                       pathname: '/filter',
-                      state: { filter: value },
+                      state: { firstJobFilter: value },
                     }}
                   >
                     {value}
@@ -69,7 +69,7 @@ function FirstPage(){
                 className="tool"
                 to={{
                   pathname: '/filter',
-                  state: { filter: languages },
+                  state: { firstJobFilter: languages },
                 }}
               >
                 {languages} 

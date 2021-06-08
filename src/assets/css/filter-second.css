@@ -181,3 +181,6 @@ button {
   letter-spacing: -0.1px;
   cursor: pointer;
 }
+.hidden {
+  pointer-events: none;
+}

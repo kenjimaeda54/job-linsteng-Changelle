@@ -174,7 +174,7 @@ button {
   border: none;
 }
 
-.tool {
+.tools {
   display: flex;
   align-items: center;
   position: relative;
@@ -187,5 +187,7 @@ button {
   font-size: 10.75pt;
   line-height: 18pt;
   letter-spacing: -0.1px;
-  cursor: pointer;
+  cursor: not-allowed;
+  opacity: 0.3;
+  pointer-events: none;
 }
