@@ -212,7 +212,7 @@ export const data = [
   
   ```
   Recurso básico que gerou bastante dificuldade para mim, foi como pegar dentro de um array de objetos outro array,por isso achei interesante colocar aqui.</br>
-  Repare no languages na chave languages.
+  Repare na chave languages.
   Eu filtrava e retornava corretamente o array,mas precisava dentro da função filter, retornar apenas os valores  do array languages:
   Com a propriedade includes(paramsJob). Eu verifico se existe  elemento quero pegar,caso for verdade ele vai gerar true.</br>
   No codigo abaixo em languages, retorna so os valores dentro do array languages.</br>
