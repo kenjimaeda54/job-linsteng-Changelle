@@ -2,6 +2,38 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+  
+
+
+## O que eu aprendi
+
+Eu aprendi a manipular estados funcionais do React,leitura de documentações é manipular estilos é componentes do 
+[Material Ui](https://material-ui.com/pt/)</br>
+Este framework é excelente para compomentes em React documentação [docs](https://material-ui.com/pt/getting-started/installation/  )</br> 
+Utilizei dois componentes SLider e o togle
+
+~~~javascript 
+export const SliderBlue = withStyles({
+  thumb: {
+    color: blue[300],
+    height: 15,
+  },
+  //track estilo aplicado no campo selecionado
+  track: {
+    color: blue[100],
+  }, 
+ ~~~
+ # Feature
+  - Hooks
+  - withStyles
+  - Solid
+  - Media Screen
+
+## Autor
+ - Frontend Mentor - [@kenjimaeda54](https://www.frontendmentor.io/profile/kenjimaeda54)
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
