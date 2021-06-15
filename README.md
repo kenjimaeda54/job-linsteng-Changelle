@@ -5,6 +5,40 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
   
 
 
+## Front Mentor - Interactive-pricing-component
+Esta é a solução para [Interactive pricing component changelle on Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-pricing-component-t0m8PIyY8)</br> 
+Front Mentor changelles ajuda voce melhorar suas habilidades construindo projetos realistas 
+ 
+## Tabelas de conteudos 
+* Visão geral
+  * <a href='#Desafio' >  Desafio </a>
+  * <a href='#Links' >  Links </a>
+* Meus processos
+  * <a href='#Construção' >  Construção </a>   
+  * <a href='#o-que-eu-aprendi' >  Aprendizado </a>
+  * <a href='#Feature' >  Feature </a>
+* <a href='#Autor' >  Autor </a> 
+
+## Visão Geral
+## Desafio
+- Usuario deveria estar pronto:</br>
+   Adapatar o layout do saite conforme o tamanho da tela do dispositivo </br>Ver o estado foco para todos os elementos interativo da tela</br>
+   Usar controle deslizante para ver os preços para diferentes numeros de visualização é togle para fixar o preço
+
+## Links
+ - Saite da solução:[interactive-pricing-kenji](https://interactive-pricing-kenji.netlify.app/)
+ - Url da solução: [Kenji solutions](https://www.frontendmentor.io/solutions/react-js-type-script-e-css-lq_nexDxp)
+
+## Construção
+  - React
+  - CSS
+  - FlexBox
+  - JSX
+  - TypeScript
+  - Material Ui
+  
+
+
 ## O que eu aprendi
 
 Eu aprendi a manipular estados funcionais do React,leitura de documentações é manipular estilos é componentes do 
