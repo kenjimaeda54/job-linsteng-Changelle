@@ -2,7 +2,7 @@
   "name": "job-listeng",
   "version": "0.1.0",
   "private": true,    
-  "homepage": "https://joblistengKenji.github.io/",  
+  "homepage": "https://kenjimaeda54.github.io/",  
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@rooks/use-timeout": "^4.11.2",
