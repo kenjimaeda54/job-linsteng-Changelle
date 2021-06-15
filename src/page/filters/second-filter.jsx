@@ -1,8 +1,17 @@
 import React,{useState,useEffect} from 'react';
-import { useLocation,Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {ParamsFilter,Timer,FiltersStyleButton} from '../../util/index';
-import done from '../../assets/img/done.svg';
-import '../../assets/css/filter-second.css'
+import {Container,
+  MainContainer,
+  SecondaryContent,
+  TopCard,
+  TopMain,
+  FooterMainTop,
+  LinkStyle,
+  RenderContainer,
+  LinkStyleClear,
+  LinkStyleRender
+} from '../styles' 
 
 
 
@@ -53,29 +62,27 @@ const SecondFilter = () => {
 
   
     return(
-        <div className="container">
-        <div className="filters" > 
-          <li className="filters-all"  >
-             <h3>{firstJobFilter}</h3>
-             <Link  to={{ pathname:'/filter/',
+        <Container>
+        <RenderContainer > 
+             <LinkStyleRender  to={{ pathname:'/filter/',
                           state: {firstJobFilter:filterSecondJob}       
-             }}>
-               <img className="done"  type="image"  src={done} alt="done" />
-             </Link>
-             <h3 style={{margin:'auto 2vw ' }} >{filterSecondJob}</h3>
-             <Link  to={{ pathname: '/filter/',
-                          state:  {firstJobFilter} 
-               }}>
-               <img className='done1' type="image"  src={done} alt="done" />
-             </Link>  
-          </li>
-          <small>{changeStyle && 'Sua lista possui 3 ou menos itens,para filtra novamente precisa limpar a lista' }</small>        
-          <Link className="clear" to={'/'}  > Limpar </Link>  
-       </div> 
+                        }}>  
+                     <small>{firstJobFilter}</small>
+             
+             </LinkStyleRender>        
+             <LinkStyleRender  to={{ pathname: '/filter/',
+                                     state:  {firstJobFilter} 
+                                  }}>
+                <small>{filterSecondJob}</small>    
+             </LinkStyleRender>  
+                <small style={{color:'red',fontWeight:'500',margin:'auto 20px'}} >{changeStyle && 'Sua lista possui 3 ou menos itens,para filtra novamente precisa limpar a lista' }</small>        
+             <LinkStyleClear to={'/'}  > Limpar </LinkStyleClear>  
+       </RenderContainer> 
          {filters.map((item) => (
-        <div key={item.id} className="main">
+        <MainContainer key={item.id} >
           <img src={item.logo} alt="company" />
-          <div className="main-itens">
+          <TopCard>
+           <TopMain> 
             <h3>{item.company}</h3>
             {item.new ? <span> new </span> : ''}
             {item.featured ? (
@@ -83,21 +90,23 @@ const SecondFilter = () => {
             ) : (
               ''
             )}
-          </div>
-          <div className="main-position">
+          </TopMain>   
+          <div>
             <h3>{item.position}</h3>
           </div>
-          <div className="main-end">
-            <p>
-              {item.postedAt} {item.contract}
-              {item.location}
-            </p>
-          </div>
-          <div className="language">
+          <FooterMainTop>
+            <small>{item.postedAt}</small> 
+              <div> </div>
+            <small>{item.contract}</small>
+            <div></div>   
+            <small> {item.location}</small>
+          </FooterMainTop>
+          </TopCard>
+          <SecondaryContent>
             {item.role === '' ? (
               ''
             ) : (
-              <Link className={changeStyle || changeButtonRole || buttonClickedRole ? "tool hidden" : "tool"}
+              <LinkStyle display={changeStyle || changeButtonRole || buttonClickedRole ? "none" : "block"}
                to={{
                 pathname: '/filter/second/third',
                 state: {listFilter:filters,
@@ -107,13 +116,13 @@ const SecondFilter = () => {
                 }
               }}>
               {item.role}   
-              </Link>
+              </LinkStyle>
             )}
             {item.level === '' ? (
               ''
             ) : (
-              <Link
-              className={changeStyle || changeButtonLevel || buttonClickedLevel ? "tool hidden" : "tool"}
+              <LinkStyle
+              display={changeStyle || changeButtonLevel || buttonClickedLevel ? "none" : "block"}
                 to={{  pathname: '/filter/second/third',
                        state: {listFilter:filters,
                                firstJobFilter,
@@ -123,15 +132,15 @@ const SecondFilter = () => {
               >
                 {item.level}
 
-              </Link>
+              </LinkStyle>
             )}
             {item.tools.length === 0
               ? '' //{value} porque estamos em uma renderização condicional
               : // não consigo pegar direto
                 item.tools.map((value,index) => (
-                  <Link
+                  <LinkStyle
                     key={index}
-                    className={changeStyle || changeButtonTools || buttonClickedTools? "tool hidden" : "tool"}
+                    display={changeStyle || changeButtonTools || buttonClickedTools? "none" : "block"}
                     to={{
                       pathname: '/filter/second/third',
                       state: { listFilter:filters,
@@ -142,12 +151,12 @@ const SecondFilter = () => {
                     }}
                   >
                     {value}
-                  </Link>
+                  </LinkStyle>
                 ))}
             {item.languages.map((languages,index) => (
-              <Link
+              <LinkStyle
                 key={index}
-                className={changeStyle || changeButtonLanguages || buttonClickedLanguages ? "tool hidden" : "tool"}
+                display={changeStyle || changeButtonLanguages || buttonClickedLanguages ? "none" : "block"}
                 to={{
                   pathname: '/filter/second/third',
                   state: {listFilter:filters,
@@ -158,12 +167,12 @@ const SecondFilter = () => {
                 }}
               >
                 {languages} 
-              </Link>
+              </LinkStyle>
             ))}
-          </div>
-        </div>
+          </SecondaryContent>
+        </MainContainer>
       ))}
-        </div> 
+        </Container> 
     );
 
     

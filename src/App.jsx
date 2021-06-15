@@ -4,6 +4,8 @@ import FilterFister from './page/filters/first-filter';
 import SecondFilter from './page/filters/second-filter';
 import ThirdFilter from './page/filters/third-filter';
 
+
+
 export default function App(){
 return (
     <BrowserRouter>

@@ -1,84 +1,93 @@
 import React from 'react';
 import { data } from '../data';
-import { Link } from 'react-router-dom';
-import '../assets/css/first-page.css'
+import {Container,
+        MainContainer,
+        SecondaryContent,
+        TopCard,
+        TopMain,
+        FooterMainTop,
+        LinkStyle
+} from './styles'
 
 function FirstPage(){
   return (
-    <div className="container"> 
+    <Container>
+      <div></div>
       {data.map((item) => (
-        <div key={item.id} className="main">
-          <img src={item.logo} alt="company" />
-          <div className="main-itens">
+        <MainContainer key={item.id} >
+          <img src={item.logo} alt="imagem logo das empresas"  />
+          <TopCard >
+          <TopMain> 
             <h3>{item.company}</h3>
-            {item.new ? <span> new </span> : ''}
+            {item.new ? <span style={{backgroundColor:"#5ca5a547"}} > new </span> : ''}
             {item.featured ? (
-              <span style={{ backgroundColor: 'black' }}> featured </span>
+              <span style={{backgroundColor: "#5CA5A5"}} > featured </span>
             ) : (
               ''
             )}
-          </div>
-          <div className="main-position">
+          </TopMain>  
+          <div >
             <h3>{item.position}</h3>
           </div>
-          <div className="main-end">
-            <p>
-              {item.postedAt} {item.contract}
-              {item.location}
-            </p>
-          </div>
-          <div className="language">
+          <FooterMainTop>
+          
+             <small>  {item.postedAt}</small> 
+             <div> </div>
+             <small>{item.contract}   </small>
+             <div></div>   
+             <small> {item.location}  </small>
+          
+          </FooterMainTop>
+          </TopCard>
+          <SecondaryContent>
             {item.role === '' ? (
               ''
             ) : (
-              <Link className="tool" to={{
+              <LinkStyle className="tool" to={{
                 pathname: '/filter',
                 state: {firstJobFilter:item.role}
               }}>
                 {item.role}
-              </Link>
+              </LinkStyle>
             )}
             {item.level === '' ? (
               ''
             ) : (
-              <Link
-                className="tool"
+              <LinkStyle
                 to={{ pathname: './filter', state: { firstJobFilter: item.level } }}
               >
                 {item.level}
-              </Link>
+              </LinkStyle>
             )}
             {item.tools.length === 0
               ? '' //{value} porque estamos em uma renderização condicional
               : // não consigo pegar direto
                 item.tools.map((value,index) => (
-                  <Link
+                  <LinkStyle
                     key={index}
-                    className="tool"
                     to={{
                       pathname: '/filter',
                       state: { firstJobFilter: value },
                     }}
                   >
                     {value}
-                  </Link>
+                  </LinkStyle>
                 ))}
             {item.languages.map((languages,index) => (
-              <Link
+              <LinkStyle
                 key={index}
-                className="tool"
                 to={{
                   pathname: '/filter',
                   state: { firstJobFilter: languages },
                 }}
               >
                 {languages} 
-              </Link>
+              </LinkStyle>
             ))}
-          </div>
-        </div>
+          </SecondaryContent>
+        </MainContainer>
       ))}
-    </div>
+    </Container>
   );
 }
 
