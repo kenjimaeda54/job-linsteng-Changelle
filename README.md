@@ -46,10 +46,10 @@ Eu aprendi a manipular estados funcionais do React,leitura de documentações é
 Esta biblioteca é excelente para estilizar em React</br>
 </br>
 
-Usei algumas metodologias de software exemplo SOLID e Singleton. Toda filtragem que repetia constantemente no codigoo foi separado</br>
-reduzindo codigo,melhora na manutenção e posibilidade de extensão.
-Codigo abaixo é o exemplo em um arquvio separei minha lista de trabalhos para posibiltar filtragem dinamica.
-E apos isto separei em outro arquivo toda logica de filtragem que repetia ao longo da aplicação.
+Usei algumas metodologias de software, exemplo: SOLID e Singleton. Toda filtragem que repetia constantemente no codigo foi separado.</br>
+Reduzindo o codigo, melhora na manutenção e posibilidade de extensão.</br>
+O codigo abaixo é um exemplo. Em um arquvio separei minha lista de trabalhos para posibiltar filtragem dinamica.</br>
+E apos isso, separei em outro arquivo toda logica de filtragem que repetia ao longo da aplicação.
 
 ~~~javascript 
 export const data = [
