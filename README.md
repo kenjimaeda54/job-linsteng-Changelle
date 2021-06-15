@@ -119,7 +119,7 @@ export const data = [
  parametro e nosso requisito,ao longo da aplicação nosso data vai se reduzindo em listas menores,ate atingir no maximo 3 filtragens.</br>
  Então na primeira chamada de ParamsFilter ele recebe o data completo,no segundo recebe a data filtrada e assim por diante.
 
- Conforme nossa data vai renderizando na tela,alguns compononentes renderiza constantemente gerando instabilidade,para resolver isto </br>
+ Conforme nossa data vai renderizando na tela,alguns compononentes renderiza constantemente, gerando instabilidade,para resolver isto </br>
  utilizei o hooks [useInterval](https://github.com/beautifulinteractions/beautiful-react-hooks/blob/HEAD/docs/useInterval.md).
  Para iniciar com ela [clica aqui](https://www.npmjs.com/package/beautiful-react-hooks).
  
@@ -211,12 +211,11 @@ export const data = [
   
   
   ```
-  Recurso básico que gerou bastante dificuldade para mim, foi como pegar dentro de um array de objetos outro array,por isso achei interesante colocar aqui</br>.
-  Nosso data havia esses parametros.
-  Eu filtrava e retornava corretamente o array,mas precisava dentro da funçaõ filter, retornar apenas os valores dentro do array tools:
-  Com a propriedade includes(paramsJob) eu verifico se este elemento possui,caso for verdade ele vai gerar true</br>
-  no codigo abaixo em languages retorna so os valores dentro do array languagens.</br>
-  Existe o find e outros recursos,porém interesante q includes compara não so os tipos,mas também valores,então para estes cassos e ideal</br>
+  Recurso básico que gerou bastante dificuldade para mim, foi como pegar dentro de um array de objetos outro array,por isso achei interesante colocar aqui.</br>
+  Eu filtrava e retornava corretamente o array,mas precisava dentro da função filter, retornar apenas os valores  do array tools:
+  Com a propriedade includes(paramsJob). Eu verifico se existe  elemento quero pegar,caso for verdade ele vai gerar true.</br>
+  No codigo abaixo em languages, retorna so os valores dentro do array languages.</br>
+  Existe o find e outros recursos,porém interesante  includes compara não so os tipos,mas também valores,então para estes cassos e ideal</br>
  
  ```javascript
  export default data=[  
