@@ -27,7 +27,7 @@ Front Mentor changelles ajuda voce melhorar suas habilidades construindo projeto
   Filtrar as listas conforme as categorias</br>
 
 ## Links
- - Saite da solução:[interactive-pricing-kenji](https://interactive-pricing-kenji.netlify.app/)
+ - Saite da solução:[filter_job]https://job-linsteng-kenji.netlify.app/)
  - Url da solução: [Kenji solutions](https://www.frontendmentor.io/solutions/react-js-styled-component-7GLAdH6PQ)
 
 ## Construção
